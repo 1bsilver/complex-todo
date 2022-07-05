@@ -9,6 +9,7 @@ Stack to be used:
 - Vue 
 - Vuetify
 - VueX
+- Vue-router
 - Jest-vue
 
 **Backend** 
@@ -41,3 +42,18 @@ Stack to be used:
 - call the create API with invalid parameters - assert status code = 409
 - call update api with an invalid parameter - You can pass an invalid id here for example, you can pass a valid id but invalid parameter
 
+This app is able to generate a PDF file of your todo list.
+
+It uses Celery to manage PDF task queue asynchronously and RabbitMQ as a message broker.
+
+To run this app locally →  
+
+1. Git clone this
+2. start rabbitmq using the command `sudo rabbitmq-server`
+3. `cd backend 
+celery -A tasks worker —loglevel=INFO`
+4. `cd backend && pip3 install -r requirements.txt
+uvicorn main:app —reload`
+5. `cd frontend && npm install
+npm run serve`
+6. don't forget to create a docker container with postgresql image and connect it with sqlalchemy engine
